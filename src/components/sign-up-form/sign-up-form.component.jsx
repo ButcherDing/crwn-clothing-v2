@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -7,8 +7,6 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-
-import { UserContext } from "../../contexts/user.contexts";
 
 import "./sign-up-form.styles.scss";
 
@@ -22,9 +20,6 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  // console.log(formFields);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -44,12 +39,10 @@ const SignUpForm = () => {
       );
       // passing displayname - was done differently in guide. Is this bad practice? Not sure why it would be... Initially I thought the same, pass in the displayname into the createUserDoc... function and somehow append it over there. But if object shapes are generic from Google, shouldn't we make them fit to that generic shape? Will the choice to modify on this end cause problems with user auth in future? We'll see...
       user.displayName = displayName;
-      setCurrentUser(user);
 
       // create user
       await createUserDocumentFromAuth(user);
       resetFormFields();
-      console.log(currentUser);
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
         alert("Can't create a new account - that email is already in use.");
