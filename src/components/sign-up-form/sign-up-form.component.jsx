@@ -39,8 +39,9 @@ const SignUpForm = () => {
         email,
         password
       );
-      // pass displayname - was done differently in guide. Is this bad practice? Not sure why it would be... Initially I thought the same, pass in the displayname into the createUserDoc... function and somehow append it over there. But if object shapes are generic from Google, shouldn't we make them fit to that generic shape? Will this cause problems with user auth in future? We'll see...
+      // passing displayname - was done differently in guide. Is this bad practice? Not sure why it would be... Initially I thought the same, pass in the displayname into the createUserDoc... function and somehow append it over there. But if object shapes are generic from Google, shouldn't we make them fit to that generic shape? Will the choice to modify on this end cause problems with user auth in future? We'll see...
       user.displayName = displayName;
+
       // create user
       const userDocRef = await createUserDocumentFromAuth(user);
       resetFormFields();
@@ -59,7 +60,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <div className="sign-up-form-container">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -73,7 +74,7 @@ const SignUpForm = () => {
         />
 
         <FormInput
-          label="email"
+          label="Email"
           type="email"
           required
           onChange={handleChange}
@@ -98,7 +99,7 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button type="google">Sign Up</Button>
+        <Button>Sign Up</Button>
       </form>
     </div>
   );
