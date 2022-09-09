@@ -1,0 +1,9 @@
+// product onClick store a number in product context assoc. with the product.
+
+// then in the return (render) of your dropdown have a map function (forEach?)
+
+// nope, that function will be in the wrapping component (cart-dropdown) in its render, it will feed in the items one at a time from context data
+
+// in other words, we don't need to use the context in the item itself, so we're gonna use the existing cart-dropdown context.
+
+//

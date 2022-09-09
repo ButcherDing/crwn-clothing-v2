@@ -4,8 +4,8 @@ import { createContext, useState } from "react";
 
 export const CartDropdownContext = createContext({
   cartItems: [],
-  isCartOpen: false,
   setCartItems: () => null,
+  isCartOpen: false,
   setIsCartOpen: () => null,
 });
 
@@ -13,7 +13,7 @@ export const CartDropdownContext = createContext({
 export const CartDropdownProvider = ({ children }) => {
   // set up your values (user data)
   const [cartItems, setCartItems] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState("hidden");
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const value = {
     cartItems,
@@ -21,7 +21,6 @@ export const CartDropdownProvider = ({ children }) => {
     isCartOpen,
     setIsCartOpen,
   };
-  console.log(value);
 
   return (
     <CartDropdownContext.Provider value={value}>
