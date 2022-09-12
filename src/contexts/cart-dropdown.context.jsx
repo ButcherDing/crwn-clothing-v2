@@ -38,6 +38,7 @@ export const CartDropdownContext = createContext({
   isCartOpen: false,
   setIsCartOpen: () => null,
   addItemToCart: () => null,
+  removeItemFromCart: () => null,
   cartCounter: () => null,
   plusQuantity: () => null,
   minusQuantity: () => null,
@@ -59,6 +60,19 @@ export const CartDropdownProvider = ({ children }) => {
   };
   const minusQuantity = (cartItemToInc) => {
     setCartItems(decreaseCartItem(cartItems, cartItemToInc));
+  };
+
+  const removeItemFromCart = (itemToRemove) => {
+    setCartItems(
+      cartItems.filter((cartItem) => cartItem.id !== itemToRemove.id)
+    );
+  };
+
+  const checkoutTotal = () => {
+    return cartItems.reduce(
+      (acc, cartItem) => acc + cartItem.price * cartItem.quantity,
+      0
+    );
   };
 
   // const minusQuantity = (cartItem) =>
@@ -91,6 +105,7 @@ export const CartDropdownProvider = ({ children }) => {
     cartCount,
     plusQuantity,
     minusQuantity,
+    removeItemFromCart,
     // minusQuantity,
   };
 

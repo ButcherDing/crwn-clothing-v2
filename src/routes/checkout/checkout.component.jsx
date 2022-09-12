@@ -3,7 +3,12 @@ import { useContext } from "react";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 export const Checkout = () => {
-  const { cartItems } = useContext(CartDropdownContext);
+  const { cartItems, checkoutTotal } = useContext(CartDropdownContext);
+
+  const totalPrice = cartItems.reduce(
+    (acc, cartItem) => acc + cartItem.price * cartItem.quantity,
+    0
+  );
 
   return (
     <div className="checkout-container">
@@ -19,6 +24,8 @@ export const Checkout = () => {
           <CheckoutItem cartItem={cartItem} id={`checkout:` + cartItem.id} />
         ))}
       </div>
+      <h2>Total</h2>
+      <h2>{totalPrice}</h2>
     </div>
   );
 };

@@ -3,9 +3,9 @@ import { useContext } from "react";
 import QuantityButton from "../quantity-button/quantity-button.component";
 
 const CheckoutItem = ({ cartItem }) => {
-  const removeItem = () => {
-    console.log("removed item");
-  };
+  const { removeItemFromCart } = useContext(CartDropdownContext);
+
+  const removeItem = () => removeItemFromCart(cartItem);
 
   const { imageUrl, name, price, quantity } = cartItem;
 
