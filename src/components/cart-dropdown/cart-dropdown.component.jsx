@@ -14,11 +14,12 @@ const CartDropdown = () => {
   return (
     isCartOpen && (
       <div className="cart-dropdown-container">
-        <div className="cart-item-container">
+        <div className="cart-items">
           {cartItems.map((cartItem) => (
             <CartItem cartItem={cartItem} key={cartItem.id}></CartItem>
           ))}
         </div>
+
         <Button>GO TO CHECKOUT</Button>
       </div>
     )

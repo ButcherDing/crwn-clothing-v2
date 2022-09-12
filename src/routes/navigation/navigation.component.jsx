@@ -1,11 +1,14 @@
 import { Fragment, useContext } from "react";
 // fragments are great because they don't actually appear as an element in the DOM when you actually load the page. Remember we need a top-level element when making our compenents, no siblings rule.
 import { Outlet, Link } from "react-router-dom";
+
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
+
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 import { UserContext } from "../../contexts/user.contexts.jsx";
+
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
