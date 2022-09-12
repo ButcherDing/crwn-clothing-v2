@@ -7,7 +7,7 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 import "./cart-icon.styles.scss";
 
 const CartIcon = () => {
-  const { isCartOpen, setIsCartOpen, cartItems, cartCounter } =
+  const { isCartOpen, setIsCartOpen, cartItems, cartCount } =
     useContext(CartDropdownContext);
 
   const cartToggler = () => {
@@ -17,7 +17,7 @@ const CartIcon = () => {
   return (
     <div className="cart-icon-container" onClick={cartToggler}>
       <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">{cartCounter}</span>
+      <span className="item-count">{cartCount}</span>
     </div>
   );
 };

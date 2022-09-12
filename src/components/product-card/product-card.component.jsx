@@ -1,4 +1,3 @@
-import { ProductsContext } from "../../contexts/products.context";
 import "./product-card.styles.scss";
 import Button from "../button/button.component";
 import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
