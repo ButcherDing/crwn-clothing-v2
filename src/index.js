@@ -5,7 +5,10 @@ import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
 import { UserProvider } from "./contexts/user.contexts";
-import { ProductsContext, ProductsProvider } from "./contexts/products.context";
+import {
+  CategoriesContext,
+  CategoriesProvider,
+} from "./contexts/categories.context";
 
 import "./index.scss";
 import {
@@ -17,11 +20,11 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ProductsProvider>
+        <CategoriesProvider>
           <CartDropdownProvider>
             <App />
           </CartDropdownProvider>
-        </ProductsProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,

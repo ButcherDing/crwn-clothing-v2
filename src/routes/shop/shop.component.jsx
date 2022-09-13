@@ -1,19 +1,18 @@
-import { useContext } from "react";
-import ProductCard from "../../components/product-card/product-card.component";
-import { ProductsContext } from "../../contexts/products.context";
+import { useContext, Fragment } from "react";
+import { Route, Routes } from "react-router-dom";
+
+import { CategoriesContext } from "../../contexts/categories.context";
 import "./shop.styles.scss";
 
-const Shop = () => {
-  // const { currentUser } = useContext(UserContext);
-  const products = useContext(ProductsContext);
+import CategoryPreview from "../../components/category-preview/category-preview.component";
 
-  // save context data in a variable, pull it down and replace here to check
+import CategoriesPreview from "../categories-preview/categories-preview.component";
+
+const Shop = () => {
   return (
-    <div className="products-container">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product}></ProductCard>
-      ))}
-    </div>
+    <Routes>
+      <Route index element={<CategoriesPreview />} />
+    </Routes>
   );
 };
 
