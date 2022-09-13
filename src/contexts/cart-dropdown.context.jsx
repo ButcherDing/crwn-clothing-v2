@@ -42,6 +42,8 @@ export const CartDropdownContext = createContext({
   cartCounter: () => null,
   plusQuantity: () => null,
   minusQuantity: () => null,
+  cartTotal: 0,
+  setCartTotal: () => null,
 });
 
 // provider - the component you want to use to get access to the value
@@ -50,6 +52,7 @@ export const CartDropdownProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   const addItemToCart = (productToAdd) => {
     setCartItems(addCartItem(cartItems, productToAdd));
@@ -68,25 +71,13 @@ export const CartDropdownProvider = ({ children }) => {
     );
   };
 
-  const checkoutTotal = () => {
-    return cartItems.reduce(
-      (acc, cartItem) => acc + cartItem.price * cartItem.quantity,
+  useEffect(() => {
+    const newCartTotal = cartItems.reduce(
+      (total, cartItem) => total + cartItem.price * cartItem.quantity,
       0
     );
-  };
-
-  // const minusQuantity = (cartItem) =>
-  //   setCartItems([
-  //     ...cartItems,
-  //     { ...cartItem, quantity: cartItem.quantity - 1 },
-  //   ]);
-
-  // const plusQuantity = (cartItem) => {
-  //   setCartItems([
-  //     ...cartItems,
-  //     { ...cartItem, quantity: cartItem.quantity + 1 },
-  //   ]);
-  // };
+    setCartTotal(newCartTotal);
+  }, [cartItems]);
 
   useEffect(() => {
     const newCartCount = cartItems.reduce(
@@ -106,7 +97,7 @@ export const CartDropdownProvider = ({ children }) => {
     plusQuantity,
     minusQuantity,
     removeItemFromCart,
-    // minusQuantity,
+    cartTotal,
   };
 
   return (

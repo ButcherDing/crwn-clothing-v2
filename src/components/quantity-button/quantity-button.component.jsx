@@ -4,18 +4,22 @@ import { useContext } from "react";
 export const QuantityButton = ({ cartItem }) => {
   const { plusQuantity, minusQuantity } = useContext(CartDropdownContext);
 
-  const plus = () => {
+  const plusHandler = () => {
     plusQuantity(cartItem);
   };
-  const minus = () => {
+  const minusHandler = () => {
     minusQuantity(cartItem);
   };
 
   return (
-    <div>
-      <span onClick={minus}>-----</span>
-      <span>{cartItem.quantity}</span>
-      <span onClick={plus}>+++++</span>
+    <div className="quantity">
+      <span className="arrow" onClick={minusHandler}>
+        &#10094;
+      </span>
+      <span className="value">{cartItem.quantity}</span>
+      <span className="arrow" onClick={plusHandler}>
+        &#10095;
+      </span>
     </div>
   );
 };

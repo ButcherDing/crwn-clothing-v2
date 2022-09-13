@@ -1,6 +1,7 @@
 import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
 import { useContext } from "react";
 import QuantityButton from "../quantity-button/quantity-button.component";
+import "./checkout-item.styles.scss";
 
 const CheckoutItem = ({ cartItem }) => {
   const { removeItemFromCart } = useContext(CartDropdownContext);
@@ -11,12 +12,16 @@ const CheckoutItem = ({ cartItem }) => {
 
   return (
     <div className="checkout-item-container">
-      <div className="checkout-item">
+      <div className="image-container">
         <img src={imageUrl}></img>
-        <span>{name}</span>
+      </div>
+      <span className="name">{name}</span>
+      <div className="quantity">
         <QuantityButton cartItem={cartItem} />
-        <span>{price}</span>
-        <span onClick={removeItem}>X</span>
+      </div>
+      <span className="price">{price}</span>
+      <div className="remove-button" onClick={removeItem}>
+        &#10005;
       </div>
     </div>
   );
