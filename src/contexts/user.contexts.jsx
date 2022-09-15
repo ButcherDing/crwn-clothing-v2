@@ -5,14 +5,20 @@ import {
   onAuthStateChangedListener,
 } from "../utils/firebase/firebase.utils";
 
+import createAction from "../utils/reducer/reducer.utils";
+
 // actual value you want to access
 export const UserContext = createContext({
   currentUser: null,
   setCurrentUser: () => null,
 });
-
+// why do we export?
 export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: "SET_CURRENT_USER",
+};
+
+const INITIAL_STATE = {
+  currentUser: null,
 };
 
 const userReducer = (state, action) => {
@@ -32,10 +38,6 @@ const userReducer = (state, action) => {
   }
 };
 
-const INITIAL_STATE = {
-  currentUser: null,
-};
-
 // provider - the component you want to use to get access to the value
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, INITIAL_STATE);
@@ -43,7 +45,7 @@ export const UserProvider = ({ children }) => {
   console.log(currentUser);
 
   const setCurrentUser = (user) => {
-    dispatch({ type: USER_ACTION_TYPES.SET_CURRENT_USER, payload: user });
+    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
   };
 
   const value = { currentUser, setCurrentUser };
