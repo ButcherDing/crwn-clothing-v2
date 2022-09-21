@@ -1,14 +1,17 @@
-import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { plusQuantity, minusQuantity } from "../../store/cart/cart.action";
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 export const QuantityButton = ({ cartItem }) => {
-  const { plusQuantity, minusQuantity } = useContext(CartDropdownContext);
+  const cartItems = useSelector(selectCartItems);
+
+  const dispatch = useDispatch();
 
   const plusHandler = () => {
-    plusQuantity(cartItem);
+    dispatch(plusQuantity(cartItems, cartItem));
   };
   const minusHandler = () => {
-    minusQuantity(cartItem);
+    dispatch(minusQuantity(cartItems, cartItem));
   };
 
   return (

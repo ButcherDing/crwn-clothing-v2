@@ -2,14 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import Directory from "../../components/directory/directory.component";
 
-import { useContext, Fragment } from "react";
-import { CategoriesContext } from "../../contexts/categories.context";
-
 const Home = () => {
-  // const { categoriesMap } = useContext(CategoriesContext);
-
-  // const categories = categoriesMap.map((category) => {});
-
   const categories = [
     {
       id: 1,

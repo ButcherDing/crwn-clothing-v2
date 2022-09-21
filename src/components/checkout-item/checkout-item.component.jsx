@@ -1,14 +1,16 @@
-import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import QuantityButton from "../quantity-button/quantity-button.component";
 import "./checkout-item.styles.scss";
+import { removeItemFromCart } from "../../store/cart/cart.action";
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 const CheckoutItem = ({ cartItem }) => {
-  const { removeItemFromCart } = useContext(CartDropdownContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
 
-  const removeItem = () => removeItemFromCart(cartItem);
+  const removeItem = () => dispatch(removeItemFromCart(cartItems, cartItem));
 
-  const { imageUrl, name, price, quantity } = cartItem;
+  const { imageUrl, name, price } = cartItem;
 
   return (
     <div className="checkout-item-container">
@@ -28,3 +30,5 @@ const CheckoutItem = ({ cartItem }) => {
 };
 
 export default CheckoutItem;
+
+//// oh boy - forgot to pass in two arguments to all actions. f me.

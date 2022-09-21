@@ -2,14 +2,17 @@ import "./cart-dropdown.styles.scss";
 import Button from "../button/button.component";
 
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { useContext } from "react";
-import { CartDropdownContext } from "../../contexts/cart-dropdown.context";
+import {
+  selectCartItems,
+  selectIsCartOpen,
+} from "../../store/cart/cart.selector";
 import CartItem from "../cart-item/cart-item.component";
 
 const CartDropdown = () => {
-  const { cartItems, setCartItems, isCartOpen } =
-    useContext(CartDropdownContext);
+  const cartItems = useSelector(selectCartItems);
+  const isCartOpen = useSelector(selectIsCartOpen);
 
   return (
     isCartOpen && (
