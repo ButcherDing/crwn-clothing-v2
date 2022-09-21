@@ -5,12 +5,12 @@ import { removeItemFromCart } from "../../store/cart/cart.action";
 import { selectCartItems } from "../../store/cart/cart.selector";
 
 const CheckoutItem = ({ cartItem }) => {
-  const dispatch = useDispatch();
-  const cartItems = useSelector(selectCartItems);
-
-  const removeItem = () => dispatch(removeItemFromCart(cartItems, cartItem));
-
   const { imageUrl, name, price } = cartItem;
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+
+  const removeItemHandler = () =>
+    dispatch(removeItemFromCart(cartItems, cartItem));
 
   return (
     <div className="checkout-item-container">
@@ -22,7 +22,7 @@ const CheckoutItem = ({ cartItem }) => {
         <QuantityButton cartItem={cartItem} />
       </div>
       <span className="price">{price}</span>
-      <div className="remove-button" onClick={removeItem}>
+      <div className="remove-button" onClick={removeItemHandler}>
         &#10005;
       </div>
     </div>

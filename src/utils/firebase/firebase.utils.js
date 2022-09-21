@@ -76,6 +76,10 @@ export const getCategoriesAndDocuments = async (collectionName) => {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
 
+  // // error demo
+  // await Promise.reject(
+  //   new Error("new error fetching categories and documents. whoops.")
+  // );
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };

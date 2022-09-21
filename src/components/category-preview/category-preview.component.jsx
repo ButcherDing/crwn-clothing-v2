@@ -2,6 +2,9 @@ import ProductCard from "../product-card/product-card.component";
 import "./category-preview.styles.scss";
 import { Link } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import { selectCategoriesIsLoading } from "../../store/categories/categories.selector";
+
 const CategoryPreview = ({ title, products }) => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);

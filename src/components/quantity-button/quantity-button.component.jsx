@@ -4,7 +4,6 @@ import { selectCartItems } from "../../store/cart/cart.selector";
 
 export const QuantityButton = ({ cartItem }) => {
   const cartItems = useSelector(selectCartItems);
-
   const dispatch = useDispatch();
 
   const plusHandler = () => {
