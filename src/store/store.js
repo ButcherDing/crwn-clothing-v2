@@ -6,6 +6,8 @@ import storage from "redux-persist/lib/storage";
 import { logger } from "redux-logger";
 // import { loggerMiddleware } from "./middleware/logger"; // homemade logger
 // import thunk from "redux-thunk";
+import createSagaMiddleware from "@redux-saga/core";
+import { rootSaga } from "./root-saga";
 
 import { rootReducer } from "./root-reducer";
 
@@ -15,12 +17,14 @@ const persistConfig = {
   whitelist: ["cart"],
 };
 
+const sagaMiddleware = createSagaMiddleware();
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // need this to run logger - to have access before changes hit the reducer?
 const middlewares = [
   process.env.NODE_ENV === "development" && logger,
-  thunk,
+  sagaMiddleware,
 ].filter(Boolean);
 
 // this is what thunk middleware does
@@ -45,6 +49,8 @@ export const store = createStore(
   undefined,
   composedEnhancers
 );
+
+sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);
 //

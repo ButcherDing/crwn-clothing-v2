@@ -40,20 +40,9 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth();
 
-///////////////// Sign in methods
-
-export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, googleProvider);
-
-export const signInEmailPass = async (email, password) => {
-  if (!email || !password) return;
-
-  return await signInWithEmailAndPassword(auth, email, password);
-};
+export const db = getFirestore();
 
 ////////////////// Create users
-
-export const db = getFirestore();
 
 export const addCollectionAndDocuments = async (
   collectionKey,
@@ -69,6 +58,17 @@ export const addCollectionAndDocuments = async (
 
   await batch.commit();
   console.log("done");
+};
+
+///////////////// Sign in methods
+
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+
+export const signInEmailPass = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
 // this is always onerous, esp with google, but at least doing things this way isolates whatever changes that might break our app, and we know how to troubleshoot.
@@ -103,7 +103,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       console.log("error creating user", err.message);
     }
   }
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -116,3 +116,16 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
