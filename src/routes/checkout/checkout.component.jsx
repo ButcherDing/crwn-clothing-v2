@@ -5,7 +5,7 @@ import {
   selectCartTotal,
 } from "../../store/cart/cart.selector";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import "./checkout.styles.scss";
+import "./checkout.styles.jsx";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);

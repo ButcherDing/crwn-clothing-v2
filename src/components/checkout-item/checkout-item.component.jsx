@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import QuantityButton from "../quantity-button/quantity-button.component";
-import "./checkout-item.styles.scss";
+import {
+  CheckoutItemContainer,
+  CheckoutItemDetail,
+  CheckoutImageContainer,
+  Quantity,
+  RemoveButton,
+} from "./checkout-item.styles.jsx";
 import { removeItemFromCart } from "../../store/cart/cart.action";
 import { selectCartItems } from "../../store/cart/cart.selector";
 
@@ -13,22 +19,22 @@ const CheckoutItem = ({ cartItem }) => {
     dispatch(removeItemFromCart(cartItems, cartItem));
 
   return (
-    <div className="checkout-item-container">
-      <div className="image-container">
-        <img src={imageUrl}></img>
-      </div>
-      <span className="name">{name}</span>
-      <div className="quantity">
+    <CheckoutItemContainer>
+      <CheckoutImageContainer>
+        <img src={imageUrl} alt={name}></img>
+      </CheckoutImageContainer>
+
+      <CheckoutItemDetail>{name}</CheckoutItemDetail>
+      {/* // I want to style this directly instead of having to stick it in a div like a divhead. */}
+      <Quantity>
         <QuantityButton cartItem={cartItem} />
-      </div>
-      <span className="price">{price}</span>
-      <div className="remove-button" onClick={removeItemHandler}>
-        &#10005;
-      </div>
-    </div>
+      </Quantity>
+
+      <CheckoutItemDetail>{price}</CheckoutItemDetail>
+
+      <RemoveButton onClick={removeItemHandler}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 
 export default CheckoutItem;
-
-//// oh boy - forgot to pass in two arguments to all actions. f me.
