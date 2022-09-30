@@ -67,30 +67,27 @@ export const signInWithGooglePopup = () =>
 
 export const signInEmailPass = async (email, password) => {
   if (!email || !password) return;
-
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
-// this is always onerous, esp with google, but at least doing things this way isolates whatever changes that might break our app, and we know how to troubleshoot.
 export const getCategoriesAndDocuments = async (collectionName) => {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef);
-
-  // // error demo
-  // await Promise.reject(
-  //   new Error("new error fetching categories and documents. whoops.")
-  // );
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalDetails
+) => {
   if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
+    const { email } = userAuth;
+    const displayName = additionalDetails;
     const createdAt = new Date();
 
     try {
@@ -105,15 +102,16 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   }
   return userSnapshot;
 };
-
+//// sign up
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
 };
-
+//// sign out
 export const signOutUser = async () => await signOut(auth);
 
+// deprecated? No, look at our new getCurrentUser
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
 

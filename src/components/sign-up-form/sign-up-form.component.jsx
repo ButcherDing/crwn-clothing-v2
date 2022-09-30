@@ -1,12 +1,10 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+import { signUpStart } from "../../store/user/user.action";
 
 import { SignUpContainer } from "./sign-up-form.styles..jsx";
 
@@ -20,11 +18,30 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const dispatch = useDispatch();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // check passwords match
+    if (password !== confirmPassword) return alert("passwords do not match");
+    // dispatch
+    try {
+      dispatch(signUpStart(email, password, displayName));
+      resetFormFields();
+    } catch (err) {
+      if (err.code === "auth/email-already-in-use") {
+        alert("Can't create a new account - that email is already in use.");
+      } else {
+        console.error("problem creating new user:", err.message);
+      }
+    }
+  };
+
+  /*
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -37,9 +54,6 @@ const SignUpForm = () => {
         email,
         password
       );
-      // passing displayname - was done differently in guide. Is this bad practice? Not sure why it would be... Initially I thought the same, pass in the displayname into the createUserDoc... function and somehow append it over there. But if object shapes are generic from Google, shouldn't we make them fit to that generic shape? Will the choice to modify on this end cause problems with user auth in future? We'll see...
-      user.displayName = displayName;
-
       // create user
       await createUserDocumentFromAuth(user);
       resetFormFields();
@@ -51,6 +65,7 @@ const SignUpForm = () => {
       }
     }
   };
+*/
 
   const handleChange = (event) => {
     const { name, value } = event.target;
