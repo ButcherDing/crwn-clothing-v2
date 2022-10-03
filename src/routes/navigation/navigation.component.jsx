@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartIcon from "../../components/cart-icon/cart-icon.component.tsx";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 import { signOutStart } from "../../store/user/user.action";
