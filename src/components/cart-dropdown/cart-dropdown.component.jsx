@@ -17,7 +17,6 @@ import {
 
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
-  console.log(cartItems);
   const isCartOpen = useSelector(selectIsCartOpen);
   const navigate = useNavigate();
 

@@ -2,6 +2,8 @@ import { takeLatest, put, all, call, cancelled } from "redux-saga/effects";
 
 import { USER_ACTION_TYPES } from "./user.types";
 
+//// still a bug where if we sign up then the name does not display in our payments - currentUser is still null?
+
 import {
   signInSuccess,
   signInFailed,
@@ -43,7 +45,10 @@ export function* signUp({ payload: { email, password, displayName } }) {
       email,
       password
     );
-    yield put(signUpSuccess(user, displayName));
+    console.log(user);
+    user.displayName = displayName;
+    console.log(user);
+    yield put(signUpSuccess(user, { displayName }));
   } catch (err) {
     console.log(`error:${err}`);
     yield put(signUpFailed(err));
@@ -95,7 +100,6 @@ export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
 }
 
 // listeners
-
 export function* onCheckUserSession() {
   yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
 }
