@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 
-// is this actually selecting our redux cartReducer? In what sense?
+import { CartItem } from "./cart.types";
+
 const selectCartReducer = (state) => state.cart;
 
 export const selectCartItems = createSelector(
@@ -13,11 +14,15 @@ export const selectIsCartOpen = createSelector(
 );
 
 export const selectCartCount = createSelector([selectCartItems], (cartItems) =>
-  cartItems.reduce((acc, newCartItem) => acc + newCartItem.quantity, 0)
+  cartItems.reduce(
+    (acc: number, newCartItem: CartItem) => acc + newCartItem.quantity,
+    0
+  )
 );
 export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
   cartItems.reduce(
-    (total, newCartItem) => total + newCartItem.price * newCartItem.quantity,
+    (total: number, newCartItem: CartItem) =>
+      total + newCartItem.price * newCartItem.quantity,
     0
   )
 );
