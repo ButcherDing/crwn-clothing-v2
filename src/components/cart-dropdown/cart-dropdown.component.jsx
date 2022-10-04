@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import {
   selectCartItems,
   selectIsCartOpen,
-} from "../../store/cart/cart.selector";
+} from "../../store/cart/cart.selector.ts";
 import CartItem from "../cart-item/cart-item.component";
 import {
   CartDropdownContainer,
