@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "typed-redux-saga";
 
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
 
@@ -12,21 +12,24 @@ import { CATEGORIES_ACTION_TYPES } from "./categories.types";
 export function* fetchCategoriesAsync() {
   try {
     // for yield to work we need generator effect, so we need call: call(func, funcArgs)
-    const categoriesArray = yield call(getCategoriesAndDocuments, "categories");
-    yield put(fetchCategoriesSuccess(categoriesArray));
+    const categoriesArray = yield* call(
+      getCategoriesAndDocuments,
+      "categories"
+    );
+    yield* put(fetchCategoriesSuccess(categoriesArray));
   } catch (err) {
-    yield put(fetchCategoriesFailed(err));
+    yield* put(fetchCategoriesFailed(err as Error));
   }
 }
 
 export function* onFetchCategories() {
   // takeLatest gets 2 args - 1) action type to respond to; 2) what will happen?
-  yield takeLatest(
+  yield* takeLatest(
     CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START,
     fetchCategoriesAsync
   );
 }
 
 export function* categoriesSaga() {
-  yield all([call(onFetchCategories)]);
+  yield* all([call(onFetchCategories)]);
 }
