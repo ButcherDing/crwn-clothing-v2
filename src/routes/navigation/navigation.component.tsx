@@ -1,8 +1,8 @@
 import { Fragment } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import CartIcon from "../../components/cart-icon/cart-icon.component.tsx";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 import { signOutStart } from "../../store/user/user.action";
@@ -10,7 +10,7 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
-import "./navigation.styles.jsx";
+import "./navigation.styles.js";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 import {
@@ -18,7 +18,7 @@ import {
   NavLinksContainer,
   NavLink,
   LogoContainer,
-} from "./navigation.styles.jsx";
+} from "./navigation.styles.js";
 
 const Navigation = () => {
   const dispatch = useDispatch();
