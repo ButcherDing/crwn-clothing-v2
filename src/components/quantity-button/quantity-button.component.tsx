@@ -1,9 +1,15 @@
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { plusQuantity, minusQuantity } from "../../store/cart/cart.action";
 import { selectCartItems } from "../../store/cart/cart.selector";
+import { CartItem } from "../../store/cart/cart.types";
 import { QuantityContainer, Arrow, Value } from "./quantity-button.styles";
 
-export const QuantityButton = ({ cartItem }) => {
+type QuantityButtonProps = {
+  cartItem: CartItem;
+};
+
+export const QuantityButton: FC<QuantityButtonProps> = ({ cartItem }) => {
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch();
 

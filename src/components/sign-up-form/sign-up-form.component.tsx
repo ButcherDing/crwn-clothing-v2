@@ -6,7 +6,7 @@ import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
 import { signUpStart } from "../../store/user/user.action";
-import { SignUpContainer } from "./sign-up-form.styles..jsx";
+import { SignUpContainer } from "./sign-up-form.styles";
 
 const defaultFormFields = {
   displayName: "",

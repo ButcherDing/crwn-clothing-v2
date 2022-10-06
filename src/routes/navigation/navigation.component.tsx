@@ -10,7 +10,7 @@ import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
-import "./navigation.styles.js";
+import "./navigation.styles";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 import {
@@ -18,7 +18,7 @@ import {
   NavLinksContainer,
   NavLink,
   LogoContainer,
-} from "./navigation.styles.js";
+} from "./navigation.styles";
 
 const Navigation = () => {
   const dispatch = useDispatch();

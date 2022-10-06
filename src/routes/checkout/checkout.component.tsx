@@ -13,7 +13,7 @@ import {
   CheckoutHeaders,
   HeaderBlock,
   Total,
-} from "./checkout.styles.jsx";
+} from "./checkout.styles";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -39,7 +39,7 @@ const Checkout = () => {
         </HeaderBlock>
       </CheckoutHeaders>
       {cartItems.map((cartItem) => (
-        <CheckoutItem cartItem={cartItem} id={cartItem.id} />
+        <CheckoutItem cartItem={cartItem} key={cartItem.id} />
       ))}
       <Total>Total: $ {cartTotal}</Total>
       <PaymentForm />

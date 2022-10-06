@@ -1,12 +1,20 @@
+import { FC } from "react";
+
 import ProductCard from "../product-card/product-card.component";
 import {
   CategoryPreviewContainer,
   CategoryTitle,
   CategoryItems,
-} from "./category-preview.styles.jsx";
+} from "./category-preview.styles";
 import { Link } from "react-router-dom";
+import { CategoryItem } from "../../store/categories/categories.types";
 
-const CategoryPreview = ({ title, products }) => {
+type CategoryPreviewProps = {
+  title: string;
+  products: CategoryItem[];
+};
+
+const CategoryPreview: FC<CategoryPreviewProps> = ({ title, products }) => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
